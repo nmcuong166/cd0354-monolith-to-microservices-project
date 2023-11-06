@@ -11,18 +11,19 @@ install:
 
 # Scripts to be run
 before_script:
-  - docker --version # Print the version
-  - docker build -t udagram-api-feed ./udagram-api-feed
-  - docker build -t udagram-api-user ./udagram-api-user
-  - docker build -t udagram-frontend ./udagram-frontend
-  - docker build -t reverseproxy ./udagram-reverseproxy
-  - docker tag udagram-api-feed nmcuong166/udagram-api-feed:latest
-  - docker tag udagram-api-user nmcuong166/udagram-api-user:latest
-  - docker tag udagram-frontend nmcuong166/udagram-frontend:latest
-  - docker tag reverseproxy nmcuong166/udagram-reverseproxy:latest
-
+  - echo '___begin build'
+  - docker build -t udagram-api-feed:latest ./udagram-api-feed
+  - docker build -t udagram-api-user:latest ./udagram-api-user
+  - docker build -t udagram-frontend:latest ./udagram-frontend
+  - docker build -t reverseproxy:latest ./udagram-reverseproxy
+  - docker tag udagram-api-feed:latest nmcuong166/udagram-api-feed:latest
+  - docker tag udagram-api-user:latest nmcuong166/udagram-api-user:latest
+  - docker tag udagram-frontend:latest nmcuong166/udagram-frontend:latest
+  - docker tag reverseproxy:latest nmcuong166/udagram-reverseproxy:latest
+  - echo 'docker image ls___'
+  - docker image ls
 after_success:
-  - docker login -u nmcuong166 -p Manhcuong1992
+  - docker login -u="nmcuong166" -p="Manhcuong1992"
   - docker push nmcuong166/udagram-api-feed:latest
   - docker push nmcuong166/udagram-api-user:latest
   - docker push nmcuong166/udagram-frontend:latest
